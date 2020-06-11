@@ -6,18 +6,21 @@ module.exports = {
       'customers',
       [
         {
+          name: 'Michelle Obama',
           email: 'michelle@obama.com',
           password: 1234,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
+          name: 'Jack Sparrow',
           email: 'jack@sparrow.com',
           password: 1234,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
+          name: 'John Doe',
           email: 'john@doe.com',
           password: 1234,
           createdAt: new Date(),

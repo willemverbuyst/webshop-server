@@ -3,14 +3,17 @@ module.exports = (sequelize, DataTypes) => {
   const order = sequelize.define(
     'order',
     {
-      cartId: DataTypes.INTEGER,
-      customerId: DataTypes.INTEGER,
+      date: DataTypes.STRING,
     },
     {}
   );
   order.associate = function (models) {
-    order.belongsTo(models.customer);
-    order.belongsTo(models.cart);
+    order.belongsto(models.customer);
+    order.belongsToMany(models.product, {
+      through: 'order_products',
+      foreignKey: 'orderId',
+    });
   };
+
   return order;
 };
