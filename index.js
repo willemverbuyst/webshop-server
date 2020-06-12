@@ -2,10 +2,12 @@ const express = require('express');
 const orderRouter = require('./routers/order');
 const productRouter = require('./routers/products');
 const authRouter = require('./routers/auth');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 4000;
 
 const app = express();
+app.use(cors());
 
 const jsonParser = express.json();
 
