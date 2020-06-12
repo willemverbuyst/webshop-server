@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { toJWT, toData } = require('../auth/jwt');
-
+const bcrypt = require('bcrypt');
 const Customer = require('../models').customer;
 const Order = require('../models').order;
 
@@ -14,7 +14,7 @@ router.post('/login', async (req, res, next) => {
     if (!customer) {
       res.status(404).send('User not found');
     } else {
-      const passwordMatch = password === customer.password;
+      const passwordMatch = bcrypt.compareSync(password, customer.password);
 
       if (passwordMatch) {
         const token = toJWT({ customerId: customer.id });
