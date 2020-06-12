@@ -3,7 +3,7 @@ const { toJWT, toData } = require('../auth/jwt');
 const bcrypt = require('bcrypt');
 const Customer = require('../models').customer;
 const Order = require('../models').order;
-
+const authMiddleware = require("../auth/middleware");
 const router = new Router();
 
 router.post('/login', async (req, res, next) => {
@@ -34,16 +34,22 @@ router.get('/test', async (req, res, next) => {
   if (auth && auth[0] === 'Bearer' && auth[1]) {
     try {
       const data = toData(auth[1]);
-    } catch (e) {
-      res.status(400).send('Invalid JWT token');
-    }
-    const allOrders = await Order.findAll({ where: { customerId: 3 } });
-    res.json(allOrders);
+      const allOrders = await Order.findAll({ where: { customerId: data.customerId } });
+      res.json(allOrders);
+  } catch (e) {
+    res.status(400).send('Invalid JWT token');
+  }
   } else {
     res.status(401).send({
       message: 'Please supply some valid credentials',
     });
   }
+});
+
+router.get("/auth", authMiddleware, (req, res) => {
+  res.send({
+    message: `You are in! ${req.customer.email}.`
+  });
 });
 
 module.exports = router;
