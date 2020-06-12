@@ -6,7 +6,9 @@ const authRouter = require('./routers/auth');
 const PORT = process.env.PORT || 4000;
 
 const app = express();
+
 const jsonParser = express.json();
+
 app.use(jsonParser);
 
 app.use('/', authRouter);
