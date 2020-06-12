@@ -1,14 +1,18 @@
-const express = require("express");
+
+const express = require('express');
+const orderRouter = require('./routers/order');
+const productRouter = require('./routers/product');
+
+
+const PORT = process.env.PORT || 4000;
+
 const app = express();
-const port = process.env.PORT || 4000;
-
-const authRouter = require('./routers/auth')
-
 const jsonParser = express.json();
-
 app.use(jsonParser);
 
 app.use('/', authRouter);
+app.use('/orders', orderRouter);
+app.use('/products', productRouter);
 
+app.listen(PORT, console.log(`listening op port: ${PORT}`));
 
-app.listen(port, () => console.log(`Listening on ${port} port...`));
