@@ -29,24 +29,23 @@ router.get('/:customerId', async (req, res, next) => {
 
 router.post('/:customerId', async (req, res, next) => {
   try {
-    const { productId, amount } = req.body;
+    const { list } = req.body;
     const { customerId } = req.params;
-
-    if (!amount || !productId) {
+    if (!list) {
       res.status(400).send('missing parameters');
     } else {
       const newOrder = await order.create({
         date: '13/6/2020',
         customerId: customerId,
       });
-
-      const newOrderProducts = await order_products.create({
-        orderId: newOrder.id,
-        productId,
-        amount,
-      });
-
-      res.json(newOrderProducts);
+      const newOrderProducts = await list.map((product) =>
+        order_products.create({
+          orderId: newOrder.id,
+          productId: product[0],
+          amount: product[1],
+        })
+      );
+      res.json(list);
     }
   } catch (e) {
     next(e);
