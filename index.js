@@ -1,6 +1,7 @@
 const express = require('express');
 const orderRouter = require('./routers/order');
 const productRouter = require('./routers/products');
+const authRouter = require('./routers/auth');
 
 const PORT = process.env.PORT || 4000;
 
