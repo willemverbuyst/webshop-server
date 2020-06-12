@@ -1,8 +1,6 @@
-
 const express = require('express');
 const orderRouter = require('./routers/order');
-const productRouter = require('./routers/product');
-
+const productRouter = require('./routers/products');
 
 const PORT = process.env.PORT || 4000;
 
@@ -15,4 +13,3 @@ app.use('/orders', orderRouter);
 app.use('/products', productRouter);
 
 app.listen(PORT, console.log(`listening op port: ${PORT}`));
-
