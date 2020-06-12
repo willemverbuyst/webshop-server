@@ -41,8 +41,8 @@ router.post('/:customerId', async (req, res, next) => {
       const newOrderProducts = await list.map((product) =>
         order_products.create({
           orderId: newOrder.id,
-          productId: product[0],
-          amount: product[1],
+          productId: product.productId,
+          amount: product.amount,
         })
       );
       res.json(list);
