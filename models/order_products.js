@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   order_products.associate = function (models) {
-    orderProducts.belongsTo(models.product);
-    orderProducts.belongsTo(models.order);
+    order_products.belongsTo(models.product);
+    order_products.belongsTo(models.order);
   };
   return order_products;
 };
